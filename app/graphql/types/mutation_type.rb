@@ -1,5 +1,8 @@
 Types::MutationType = GraphQL::ObjectType.define do
   name "Mutation"
 
-  # TODO: Add Mutations as fields
+  field :createPost, function: Resolvers::CreatePost.new
+  field :createUser, function: Resolvers::CreateUser.new
+  field :signinUser, function: Resolvers::SignInUser.new
+  field :createComment, function: Resolvers::CreateComment.new
 end

@@ -3,5 +3,6 @@ Types::PostType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :title, !types.String
   field :body, types.String
-  field :comments, types[CommentType]
+  field :comments, types[!Types::CommentType]
+  field :postedBy, -> { Types::UserType }, property: :user
 end
