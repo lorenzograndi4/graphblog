@@ -1,6 +1,6 @@
 # README
 
-Simple Rails app to play with GraphQL and see how to do basic configurations
+Simple Rails app to play with GraphQL and do basic configurations
 
 -----
 
