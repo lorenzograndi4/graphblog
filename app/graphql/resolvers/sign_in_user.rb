@@ -1,4 +1,5 @@
 class Resolvers::SignInUser < GraphQL::Function
+  # this could also be a Mutation class
   argument :email, !Types::AuthProviderEmailInput
 
   # defines inline return type for the mutation
@@ -15,7 +16,7 @@ class Resolvers::SignInUser < GraphQL::Function
     # basic validation
     return unless input
 
-    user = User.find_by email: input[:email]
+    user = User.find_by(email: input[:email])
 
     # ensures we have the correct user
     return unless user
@@ -29,7 +30,7 @@ class Resolvers::SignInUser < GraphQL::Function
 
     OpenStruct.new({
       user: user,
-      token: token
+      token: AuthToken.token(user)
     })
   end
 end

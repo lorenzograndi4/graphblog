@@ -17,7 +17,7 @@ class GraphqlController < ApplicationController
   private
 
   def current_user
-    # if we want to change the sign-in strategy, this is the place todo it
+    # if we want to change the sign-in strategy, this is the place to do it
     return unless session[:token]
 
     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base.byteslice(0..31))
