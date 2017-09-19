@@ -2,7 +2,10 @@ Types::QueryType = GraphQL::ObjectType.define do
   name "Query"
 
   field :allPosts, !types[Types::PostType] do
-    resolve -> (obj, args, ctx) { Post.all }
+    argument :limit, types.Int, default_value: 10, prepare: -> (limit) {[limit, 30].min}
+    resolve -> (obj, args, ctx) { 
+      Post.limit(args[:limit]).order(id: :desc)
+    }
   end
 
   field :user do
