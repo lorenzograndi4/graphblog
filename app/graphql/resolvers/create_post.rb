@@ -16,5 +16,11 @@ class Resolvers::CreatePost < GraphQL::Function
       body: args[:body],
       user: _ctx[:current_user]
     )
+
+  rescue ActiveRecord::RecordNotFound => e
+    GraphQL::ExecutionError.new("No post with ID #{args[:postId]} found.")
+  rescue ActiveRecord::RecordInvalid => e
+    GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
+
   end
 end
